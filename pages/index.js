@@ -1,18 +1,31 @@
+import Link from 'next/link'
 import Head from 'next/head'
+import { getSortedPostData } from '../lib/posts'
 
-export default function Home() {
+export async function getStaticProps() {
+  const allPostsData = getSortedPostsData()
+  return {
+    props: {
+      allPostsData
+    }
+  }
+}
+
+export default function Home({ allPostsData }) {
   return (
     <div className="container">
       <Head>
-        <title>Create Next App</title>
+        <title>Create Next Application</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <main>
         <h1 className="title">
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
+          Read{' '}
+          <Link href="/posts/first-post">
+            this page!
+          </Link>
         </h1>
-
         <p className="description">
           Get started by editing <code>pages/index.js</code>
         </p>
